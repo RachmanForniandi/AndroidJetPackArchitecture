@@ -1,5 +1,6 @@
 package com.anushka.viewmodeldemo2
 
+import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,11 +10,16 @@ class MainActivityViewModel(startingTotal : Int) : ViewModel() {
      val totalData : LiveData<Int>
      get() = total
 
+
+    val inputText = MutableLiveData<String>()
+
     init {
         total.value = startingTotal
     }
 
-    fun setTotal(input:Int){
-        total.value =(total.value)?.plus(input)
+
+    fun setTotal(){
+        val intInput:Int = inputText.value?.toInt() ?: 0
+        total.value =(total.value)?.plus(intInput)
     }
 }

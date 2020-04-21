@@ -17,12 +17,15 @@ class MainActivity : AppCompatActivity() {
         viewModelFactory = MainActivityViewModelFactory(125)
         viewModel = ViewModelProviders.of(this,viewModelFactory).get(MainActivityViewModel::class.java)
 
-        viewModel.totalData.observe(this, Observer {
+        binding.challengeViewModel = viewModel
+        binding.lifecycleOwner = this
+
+        /*viewModel.totalData.observe(this, Observer {
             binding.resultTextView.text = it.toString()
         })
-
-        binding.insertButton.setOnClickListener {
+*/
+        /*binding.insertButton.setOnClickListener {
             viewModel.setTotal(binding.inputEditText.text.toString().toInt())
-        }
+        }*/
     }
 }
