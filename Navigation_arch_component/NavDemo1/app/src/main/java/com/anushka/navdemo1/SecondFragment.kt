@@ -1,6 +1,7 @@
 package com.anushka.navdemo1
 
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,10 @@ class SecondFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         secondBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_second, container, false)
+
+        val receivedBundle = arguments?.getString("user_input")
+        secondBinding.textView.text = receivedBundle.toString()
+
         return secondBinding.root
     }
 
