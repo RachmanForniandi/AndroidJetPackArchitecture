@@ -19,7 +19,12 @@ class MainActivity : AppCompatActivity() {
         btnDownloadUserData.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
                 //downloadUserData()
-                tvUserMessage.text = UserDataManager().getTotalUserCount().toString()
+
+                /*utk unstructured concurrency*/
+                //tvUserMessage.text = UserDataManager().getTotalUserCount().toString()
+                /*utk structured concurrency*/
+                tvUserMessage.text = UserDataManager2().getTotalUserCount().toString()
+
             }
 
         }
