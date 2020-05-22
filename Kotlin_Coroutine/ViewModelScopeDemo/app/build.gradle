@@ -36,8 +36,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     // viewmodel, livedata
-    def arch_version = '2.2.0-alpha04'
+    def arch_version = '2.2.0'
     implementation "androidx.lifecycle:lifecycle-extensions:$arch_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$arch_version"
 
 
     testImplementation 'junit:junit:4.12'
