@@ -1,4 +1,4 @@
-package com.example.learnroom
+package com.example.learnroom.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.learnroom.R
 import com.example.learnroom.adapter.DataAdapter
 import com.example.learnroom.databinding.ActivityMainBinding
 import com.example.learnroom.dbModel.Subscriber
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mBinding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         val dao = SubscriberDatabase.getInstance(application).subscriberDAO
         val repository = SubscriberRepository(dao)
         val factory = SubscriberViewModelFactory(repository)
@@ -34,6 +35,11 @@ class MainActivity : AppCompatActivity() {
         mBinding.lifecycleOwner = this
 
         initRoomDataLocal()
+        subscriberViewModel.message.observe(this, Observer {
+            it.getContentIfNotHandled().let {
+                Toast.makeText(this,it,Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     private fun initRoomDataLocal() {
