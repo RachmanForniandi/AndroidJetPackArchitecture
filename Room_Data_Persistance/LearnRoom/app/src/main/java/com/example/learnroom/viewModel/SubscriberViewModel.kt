@@ -1,5 +1,6 @@
 package com.example.learnroom.viewModel
 
+import android.util.Patterns
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.lifecycle.LiveData
@@ -41,16 +42,24 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
     }
 
     fun saveOrUpdate(){
-        if (isUpdateOrDelete){
-            subscriberToUpdateOrDelete.name = inputName.value.toString()
-            subscriberToUpdateOrDelete.email = inputEmail.value.toString()
-            update(subscriberToUpdateOrDelete)
+        if (inputName.value==null){
+            statusMessage.value = Event("Please enter subscriber's name data")
+        }else if(inputEmail.value==null){
+            statusMessage.value = Event("Please enter subscriber's email data")
+        }else if (!Patterns.EMAIL_ADDRESS.matcher(inputEmail.value.toString()).matches()){
+            statusMessage.value = Event("Please enter a correct email address")
         }else{
-            val name = inputName.value
-            val email = inputEmail.value
-            insert(Subscriber(0, name.toString(), email.toString()))
-            inputName.value =null
-            inputEmail.value =null
+            if (isUpdateOrDelete){
+                subscriberToUpdateOrDelete.name = inputName.value.toString()
+                subscriberToUpdateOrDelete.email = inputEmail.value.toString()
+                update(subscriberToUpdateOrDelete)
+            }else{
+                val name = inputName.value
+                val email = inputEmail.value
+                insert(Subscriber(0, name.toString(), email.toString()))
+                inputName.value =null
+                inputEmail.value =null
+            }
         }
     }
 
