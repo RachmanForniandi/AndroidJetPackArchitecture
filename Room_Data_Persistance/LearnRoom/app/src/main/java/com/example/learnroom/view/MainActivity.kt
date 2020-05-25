@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding:ActivityMainBinding
     private lateinit var subscriberViewModel: SubscriberViewModel
+    private lateinit var adapter: DataAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +45,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRoomDataLocal() {
         mBinding.subscriberRecyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = DataAdapter({selectedItem:Subscriber->listItemClick(selectedItem)})
+        mBinding.subscriberRecyclerView.adapter = adapter
         showSubscribersList()
     }
 
@@ -51,7 +54,9 @@ class MainActivity : AppCompatActivity() {
     private fun showSubscribersList(){
         subscriberViewModel.subscriber.observe(this, Observer {
             Log.i("MYTAG",it.toString())
-            mBinding.subscriberRecyclerView.adapter = DataAdapter(it,{selectedItem:Subscriber->listItemClick(selectedItem)})
+            //mBinding.subscriberRecyclerView.adapter = DataAdapter(it,{selectedItem:Subscriber->listItemClick(selectedItem)})
+            adapter.setList(it)
+            adapter.notifyDataSetChanged()
         })
     }
 

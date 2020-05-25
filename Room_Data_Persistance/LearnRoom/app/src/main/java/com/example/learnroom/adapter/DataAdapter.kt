@@ -8,7 +8,8 @@ import com.example.learnroom.R
 import com.example.learnroom.databinding.ListUserDataBinding
 import com.example.learnroom.dbModel.Subscriber
 
-class DataAdapter (private val subscribersList: List<Subscriber>,private val clickListener:(Subscriber)->Unit): RecyclerView.Adapter<DataHolder>() {
+class DataAdapter (private val clickListener:(Subscriber)->Unit): RecyclerView.Adapter<DataHolder>() {
+    private val subscribersList= ArrayList<Subscriber>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataHolder {
         val binding:ListUserDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.list_user_data,parent,false)
@@ -21,6 +22,11 @@ class DataAdapter (private val subscribersList: List<Subscriber>,private val cli
 
     override fun onBindViewHolder(holder: DataHolder, position: Int) {
         holder.bind(subscribersList[position],clickListener)
+    }
+
+    fun setList(subscribers: List<Subscriber>){
+        subscribersList.clear()
+        subscribersList.addAll(subscribers)
     }
 }
 
