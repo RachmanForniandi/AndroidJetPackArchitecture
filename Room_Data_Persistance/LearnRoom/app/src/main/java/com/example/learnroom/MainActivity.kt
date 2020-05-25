@@ -3,12 +3,14 @@ package com.example.learnroom
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.learnroom.adapter.DataAdapter
 import com.example.learnroom.databinding.ActivityMainBinding
+import com.example.learnroom.dbModel.Subscriber
 import com.example.learnroom.dbModel.SubscriberDatabase
 import com.example.learnroom.localRepository.SubscriberRepository
 import com.example.learnroom.viewModel.SubscriberViewModel
@@ -43,7 +45,14 @@ class MainActivity : AppCompatActivity() {
     private fun showSubscribersList(){
         subscriberViewModel.subscriber.observe(this, Observer {
             Log.i("MYTAG",it.toString())
-            mBinding.subscriberRecyclerView.adapter = DataAdapter(it )
+            mBinding.subscriberRecyclerView.adapter = DataAdapter(it,{selectedItem:Subscriber->listItemClick(selectedItem)})
         })
     }
+
+    private fun listItemClick(subscriber:Subscriber){
+        Toast.makeText(this,"Selected name is ${subscriber.name}",Toast.LENGTH_LONG).show()
+        subscriberViewModel.initUpdateAndDelete(subscriber)
+    }
+
+
 }

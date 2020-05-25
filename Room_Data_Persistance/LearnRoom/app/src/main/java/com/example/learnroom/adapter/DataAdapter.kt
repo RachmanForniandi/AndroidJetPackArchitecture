@@ -8,7 +8,7 @@ import com.example.learnroom.R
 import com.example.learnroom.databinding.ListUserDataBinding
 import com.example.learnroom.dbModel.Subscriber
 
-class DataAdapter (private val subscribersList: List<Subscriber>): RecyclerView.Adapter<DataHolder>() {
+class DataAdapter (private val subscribersList: List<Subscriber>,private val clickListener:(Subscriber)->Unit): RecyclerView.Adapter<DataHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataHolder {
         val binding:ListUserDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.list_user_data,parent,false)
@@ -20,14 +20,17 @@ class DataAdapter (private val subscribersList: List<Subscriber>): RecyclerView.
     }
 
     override fun onBindViewHolder(holder: DataHolder, position: Int) {
-        holder.bind(subscribersList[position])
+        holder.bind(subscribersList[position],clickListener)
     }
 }
 
 class DataHolder(val binding: ListUserDataBinding):RecyclerView.ViewHolder(binding.root) {
-    fun bind(subscriber: Subscriber) {
+    fun bind(subscriber: Subscriber,clickListener:(Subscriber)->Unit) {
         binding.tvName.text = subscriber.name
         binding.tvEmail.text = subscriber.email
+        binding.cardData.setOnClickListener {
+            clickListener(subscriber)
+        }
     }
 
 }
