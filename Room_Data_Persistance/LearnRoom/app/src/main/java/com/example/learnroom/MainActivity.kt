@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.learnroom.adapter.DataAdapter
 import com.example.learnroom.databinding.ActivityMainBinding
 import com.example.learnroom.dbModel.SubscriberDatabase
 import com.example.learnroom.localRepository.SubscriberRepository
@@ -28,14 +30,20 @@ class MainActivity : AppCompatActivity() {
 
         mBinding.localViewModel = subscriberViewModel
         mBinding.lifecycleOwner = this
-        showSubscribersList()
 
-
+        initRoomDataLocal()
     }
+
+    private fun initRoomDataLocal() {
+        mBinding.subscriberRecyclerView.layoutManager = LinearLayoutManager(this)
+        showSubscribersList()
+    }
+
 
     private fun showSubscribersList(){
         subscriberViewModel.subscriber.observe(this, Observer {
             Log.i("MYTAG",it.toString())
+            mBinding.subscriberRecyclerView.adapter = DataAdapter(it )
         })
     }
 }
