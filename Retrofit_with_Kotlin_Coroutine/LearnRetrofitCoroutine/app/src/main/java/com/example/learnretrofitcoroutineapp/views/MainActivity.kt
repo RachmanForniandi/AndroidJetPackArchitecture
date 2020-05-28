@@ -3,25 +3,46 @@ package com.example.learnretrofitcoroutineapp.views
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
 import com.example.learnretrofitcoroutineapp.R
 import com.example.learnretrofitcoroutineapp.models.Albums
+import com.example.learnretrofitcoroutineapp.models.AlbumsItem
 import com.example.learnretrofitcoroutineapp.networkUtils.AlbumService
 import com.example.learnretrofitcoroutineapp.networkUtils.NetworkInstance
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var retroService: AlbumService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val retroService = NetworkInstance
+        retroService = NetworkInstance
             .getRetrofitInstance()
             .create(AlbumService::class.java)
+        getRequestWithQueryParameters()
+
+
+
+
+    }
+
+    private fun getRequestWithQueryParameters(){
+        val pathResponse:LiveData<Response<AlbumsItem>> = liveData {
+            //val  response = retroService.getAlbumsData()
+            val  response2 = retroService.getAlbum(3)
+            emit(response2)
+        }
+
+        pathResponse.observe(this, Observer {
+            val title = it.body()?.title
+            Toast.makeText(applicationContext,title,Toast.LENGTH_LONG).show()
+        })
 
         val responseLiveData:LiveData<Response<Albums>> = liveData {
             //val  response = retroService.getAlbumsData()
@@ -36,8 +57,8 @@ class MainActivity : AppCompatActivity() {
                     val albumsItem = albumList.next()
                     Log.i("MYTAG",albumsItem.title)
                     val result=" "+"Album Title : ${albumsItem.title}"+"\n"+
-                                    " "+"Album id : ${albumsItem.id}"+"\n"+
-                                    " "+"User id : ${albumsItem.userId}"+"\n\n\n"
+                            " "+"Album id : ${albumsItem.id}"+"\n"+
+                            " "+"User id : ${albumsItem.userId}"+"\n\n\n"
                     textView.append(result)
                 }
             }
