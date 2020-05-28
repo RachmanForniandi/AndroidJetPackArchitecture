@@ -25,11 +25,8 @@ class MainActivity : AppCompatActivity() {
         retroService = NetworkInstance
             .getRetrofitInstance()
             .create(AlbumService::class.java)
-        getRequestWithQueryParameters()
-
-
-
-
+        //getRequestWithQueryParameters()
+        uploadAlbum()
     }
 
     private fun getRequestWithQueryParameters(){
@@ -62,6 +59,23 @@ class MainActivity : AppCompatActivity() {
                     textView.append(result)
                 }
             }
+        })
+    }
+
+    private fun uploadAlbum(){
+        val album = AlbumsItem(0,"My Title",3)
+        val postResponse :LiveData<Response<AlbumsItem>> = liveData{
+            val response = retroService.uploadAlbum(album)
+            emit(response)
+        }
+
+        postResponse.observe(this, Observer {
+            val receivedResponse =it.body()
+            val result=" "+"Album Title : ${receivedResponse?.title}"+"\n"+
+                    " "+"Album id : ${receivedResponse?.id}"+"\n"+
+                    " "+"User id : ${receivedResponse?.userId}"+"\n\n\n"
+            textView.text =result
+
         })
     }
 }
