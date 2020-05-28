@@ -1,4 +1,4 @@
-package com.example.learnretrofitcoroutineapp
+package com.example.learnretrofitcoroutineapp.models
 
 
 import com.google.gson.annotations.SerializedName
