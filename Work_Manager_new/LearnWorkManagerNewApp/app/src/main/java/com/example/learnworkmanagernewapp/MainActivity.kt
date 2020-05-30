@@ -37,6 +37,26 @@ class MainActivity : AppCompatActivity() {
             .setConstraints(constraints)
             .setInputData(data)
             .build()
+
+        val filteringRequest = OneTimeWorkRequest.Builder(FilteringWorker::class.java)
+            .build()
+
+        val compressingRequest = OneTimeWorkRequest.Builder(CompressingWorker::class.java)
+            .build()
+
+        val downloadingRequest = OneTimeWorkRequest.Builder(DownLoadingWorker::class.java)
+            .build()
+
+        val parallelWorks = mutableListOf<OneTimeWorkRequest>()
+        parallelWorks.add(downloadingRequest)
+        parallelWorks.add(filteringRequest)
+
+        workManager
+            .beginWith(parallelWorks)
+            .then(compressingRequest)
+            .then(uploadRequest)
+            .enqueue()
+
         WorkManager.getInstance(applicationContext).enqueue(uploadRequest)
         workManager.getWorkInfoByIdLiveData(uploadRequest.id)
             .observe(this, Observer {
