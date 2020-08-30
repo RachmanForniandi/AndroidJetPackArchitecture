@@ -36,10 +36,10 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
     val message : LiveData<Event<String>>
     get() = statusMessage
 
-    init {
+    /*init {
         saveOrUpdateButtonText.value = "Save"
         clearAllOrDeleteButtonText.value = "Clear All"
-    }
+    }*/
 
     fun saveOrUpdate(){
         if (inputName.value==null){
