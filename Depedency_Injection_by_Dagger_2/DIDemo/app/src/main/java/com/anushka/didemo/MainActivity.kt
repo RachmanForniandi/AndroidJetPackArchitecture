@@ -12,10 +12,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        DaggerSmartPhoneComponent.create()
+        /*DaggerSmartPhoneComponent.create()
             //.getSmartPhone()
             .inject(this)
-            smartPhone.makeACallWithRecording()
+            smartPhone.makeACallWithRecording()*/
+        /*DaggerSmartPhoneComponent.builder()
+            .memoryCardModule(MemoryCardModule(1000))
+            .build()*/
+
+        (application as SmartPhoneApplication).smartPhoneComponent
+            .inject(this)
 
         
 
