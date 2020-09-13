@@ -1,4 +1,4 @@
-package com.anushka.tmdbclient.domain.repositories.datasource
+package com.anushka.tmdbclient.domain.repositories.movies.datasource
 
 import com.anushka.tmdbclient.models.movie.Movie
 

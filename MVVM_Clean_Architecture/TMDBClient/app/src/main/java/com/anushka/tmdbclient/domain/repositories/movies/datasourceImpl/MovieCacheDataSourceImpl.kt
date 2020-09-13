@@ -1,7 +1,7 @@
-package com.anushka.tmdbclient.domain.repositories.datasourceImpl
+package com.anushka.tmdbclient.domain.repositories.movies.datasourceImpl
 
 import com.anushka.tmdbclient.models.movie.Movie
-import com.anushka.tmdbclient.domain.repositories.datasource.MovieCacheDataSource
+import com.anushka.tmdbclient.domain.repositories.movies.datasource.MovieCacheDataSource
 
 class MovieCacheDataSourceImpl: MovieCacheDataSource {
     private var movieList = ArrayList<Movie>()

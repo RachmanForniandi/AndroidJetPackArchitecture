@@ -1,8 +1,8 @@
-package com.anushka.tmdbclient.domain.repositories.datasourceImpl
+package com.anushka.tmdbclient.domain.repositories.movies.datasourceImpl
 
 import com.anushka.tmdbclient.local.MovieDao
 import com.anushka.tmdbclient.models.movie.Movie
-import com.anushka.tmdbclient.domain.repositories.datasource.MovieLocalDataSource
+import com.anushka.tmdbclient.domain.repositories.movies.datasource.MovieLocalDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

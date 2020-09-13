@@ -1,10 +1,11 @@
-package com.anushka.tmdbclient.domain.repositories
+package com.anushka.tmdbclient.domain.repositories.movies.datasourceImpl
 
 import android.util.Log
+import com.anushka.tmdbclient.domain.repositories.movies.MovieRepository
 import com.anushka.tmdbclient.models.movie.Movie
-import com.anushka.tmdbclient.domain.repositories.datasource.MovieCacheDataSource
-import com.anushka.tmdbclient.domain.repositories.datasource.MovieLocalDataSource
-import com.anushka.tmdbclient.domain.repositories.datasource.MovieRemoteDataSource
+import com.anushka.tmdbclient.domain.repositories.movies.datasource.MovieCacheDataSource
+import com.anushka.tmdbclient.domain.repositories.movies.datasource.MovieLocalDataSource
+import com.anushka.tmdbclient.domain.repositories.movies.datasource.MovieRemoteDataSource
 
 class MovieRepositoryImpl(private val movieRemoteDataSource: MovieRemoteDataSource,
                           private val movieLocalDataSource: MovieLocalDataSource,
@@ -57,7 +58,7 @@ class MovieRepositoryImpl(private val movieRemoteDataSource: MovieRemoteDataSour
         return movieList
     }
 
-    private suspend fun getMoviesFromDB(): List<Movie> {
+     suspend fun getMoviesFromDB(): List<Movie> {
         lateinit var movieList: List<Movie>
         try {
             movieList = movieLocalDataSource.getMoviesFromDb()
