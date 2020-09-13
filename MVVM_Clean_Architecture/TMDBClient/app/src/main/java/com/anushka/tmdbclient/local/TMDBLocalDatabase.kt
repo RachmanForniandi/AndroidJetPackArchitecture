@@ -1,6 +1,7 @@
 package com.anushka.tmdbclient.local
 
 import androidx.room.Database
+
 import androidx.room.RoomDatabase
 import com.anushka.tmdbclient.models.artist.Artist
 import com.anushka.tmdbclient.models.movie.Movie
