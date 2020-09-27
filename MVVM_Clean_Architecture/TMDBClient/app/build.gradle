@@ -27,13 +27,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding{
-        enabled = true
+    buildFeatures{
+        dataBinding = true
     }
 
 }
 
 dependencies {
+    implementation 'androidx.wear:wear:1.0.0'
+    compileOnly 'com.google.android.wearable:wearable:2.7.0'
     def lifecycle_version = "2.2.0"
     def arch_version = "2.1.0"
     def room_version = "2.2.5"
@@ -56,7 +58,7 @@ dependencies {
     // Annotation processor
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    //kapt "androidx.room:room-compiler:$room_version"
     // Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
     //coroutines
