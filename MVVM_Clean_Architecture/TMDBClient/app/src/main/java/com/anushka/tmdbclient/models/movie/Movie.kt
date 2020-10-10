@@ -17,9 +17,9 @@ data class Movie(
     @SerializedName("release_date")
     val releaseDate: String,
     @SerializedName("title")
-    val title: String,
+    val title: String
 
-
+/*
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")
@@ -42,5 +42,5 @@ data class Movie(
     @SerializedName("vote_average")
     val voteAverage: Int,
     @SerializedName("vote_count")
-    val voteCount: Int
+    val voteCount: Int*/
 )

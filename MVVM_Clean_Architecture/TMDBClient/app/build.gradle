@@ -17,6 +17,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String","API_KEY","\"04a5984bb20ef987a182de11ee3810b4\""
+        buildConfigField "String","BASE_URL","\"https://api.themoviedb.org/3/\""
 
 
     }
@@ -34,8 +35,6 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.wear:wear:1.0.0'
-    compileOnly 'com.google.android.wearable:wearable:2.7.0'
     def lifecycle_version = "2.2.0"
     def arch_version = "2.1.0"
     def room_version = "2.2.5"
