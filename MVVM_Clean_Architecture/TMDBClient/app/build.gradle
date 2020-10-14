@@ -20,6 +20,7 @@ android {
         buildConfigField "String","BASE_URL","\"https://api.themoviedb.org/3/\""
 
 
+
     }
 
     buildTypes {
@@ -57,7 +58,7 @@ dependencies {
     // Annotation processor
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     implementation "androidx.room:room-runtime:$room_version"
-    //kapt "androidx.room:room-compiler:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
     // Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
     //coroutines
