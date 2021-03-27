@@ -6,6 +6,7 @@ class MyCalc : Calculations {
 
     override fun calculateCircumference(redius: Double): Double {
         return 2 * pi * redius
+        //return 34.1
     }
 
     override fun calculateArea(redius: Double): Double {

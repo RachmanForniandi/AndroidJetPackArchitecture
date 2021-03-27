@@ -24,7 +24,6 @@ class CalcViewModel(
     fun calculate() {
 
         try {
-
             val radiusDoubleValue = radius.value?.toDouble()
             if (radiusDoubleValue != null) {
                 calculateArea(radiusDoubleValue)
