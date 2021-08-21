@@ -24,13 +24,25 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Column (
+            //column
+//            Column (
+//                modifier = Modifier
+//                    .background(color = Color.LightGray)
+//                    .fillMaxSize(),
+//            verticalArrangement = Arrangement.Center,
+//                horizontalAlignment = Alignment.CenterHorizontally,
+//                    )
+
+            //row
+            Row(
                 modifier = Modifier
                     .background(color = Color.LightGray)
                     .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                    ){
+                verticalAlignment= Alignment.Bottom,
+                horizontalArrangement = Arrangement.SpaceEvenly
+            )
+
+            {
                 Greeting("Hello !")
                 Greeting("Hey")
                 Greeting("Everyone !!")
