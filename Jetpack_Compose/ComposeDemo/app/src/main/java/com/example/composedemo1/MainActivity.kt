@@ -1,18 +1,25 @@
 package com.example.composedemo1
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -25,6 +32,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            Column(
+                verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+            ) {
+                ButtonDemo()
+            }
             //column
 //            Column (
 //                modifier = Modifier
@@ -48,7 +62,9 @@ class MainActivity : ComponentActivity() {
 //                Greeting("Hey")
 //                Greeting("Everyone !!")
 //            }
-            BoxExample3()
+            //BoxExample3()
+
+
 
         }
     }
@@ -204,7 +220,7 @@ fun BoxExample3() {
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .padding(10.dp)
-                .border(5.dp,Color.DarkGray, RectangleShape)
+                .border(5.dp, Color.DarkGray, RectangleShape)
 
         ){
             Text("Add To Cart")
@@ -212,13 +228,94 @@ fun BoxExample3() {
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
-    ComposeDemo1Theme {
-        Greeting("Android")
+fun ButtonDemo(){
+    val context = LocalContext.current
+    Button(onClick = { Toast.makeText(context, "Clicked On Button", Toast.LENGTH_SHORT).show()
+    }) {
+        Text("Add To Cart")
     }
+
+    Button(onClick = { Toast.makeText(context, "Clicked On Button", Toast.LENGTH_SHORT).show()
+    },enabled = false) {
+        Text("Add To Cart")
+    }
+
+    TextButton(onClick = { Toast.makeText(context, "Clicked On Text Button", Toast.LENGTH_SHORT).show()
+    }) {
+        Text("Add To Cart")
+    }
+
+    OutlinedButton(onClick = { Toast.makeText(context, "Clicked Outlined Button", Toast.LENGTH_SHORT).show()
+    }) {
+        Text("Add To Cart")
+    }
+
+    IconButton(onClick = {
+        Toast.makeText(context, "Clicked Outlined Button", Toast.LENGTH_SHORT).show()
+    }) {
+        Icon(Icons.Filled.Refresh,
+            contentDescription = "Refresh Button",
+        tint = Color.DarkGray,
+        modifier = Modifier.size(80.dp)
+        )
+    }
+
+    Button(
+        onClick = { Toast.makeText(context, "Clicked On Button", Toast.LENGTH_SHORT).show()
+    },
+        contentPadding = PaddingValues(16.dp),
+        border = BorderStroke(10.dp,Color.Black),
+        colors = ButtonDefaults.textButtonColors(
+            backgroundColor = Color.DarkGray,
+            contentColor = Color.White
+        )
+    ) {
+        Text("Add To Cart",style = MaterialTheme.typography.h3,
+        modifier = Modifier.padding(5.dp))
+
+    }
+
+    Button(
+        onClick = { Toast.makeText(context, "Clicked On Button", Toast.LENGTH_SHORT).show()
+        },  shape= CutCornerShape(10.dp),
+        contentPadding = PaddingValues(16.dp),
+        border = BorderStroke(10.dp,Color.Black),
+        colors = ButtonDefaults.textButtonColors(
+            backgroundColor = Color.DarkGray,
+            contentColor = Color.White
+        )
+    ) {
+        Text("Add To Cart",
+            style = MaterialTheme.typography.h3,
+            modifier = Modifier.padding(5.dp)
+        )
+    }
+
+    Button(
+        onClick = { },
+        shape= CircleShape,
+        contentPadding = PaddingValues(16.dp),
+        border = BorderStroke(10.dp,Color.Black),
+        colors = ButtonDefaults.textButtonColors(
+            backgroundColor = Color.DarkGray,
+            contentColor = Color.White
+        )
+    ) {
+        Text("Add To Cart",style = MaterialTheme.typography.h3,
+            modifier = Modifier.padding(5.dp))
+
+    }
+
 }
+
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//    ComposeDemo1Theme {
+//        Greeting("Android")
+//    }
+//}
 
 
 
